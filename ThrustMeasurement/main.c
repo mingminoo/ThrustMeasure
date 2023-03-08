@@ -18,26 +18,25 @@
 #pragma comment(lib, "ComCtl32.lib")
 
 extern void rs232LoadCell_1_Recv(SaveParameters* vSaveP, const char* buffer);
-extern void rs232LoadCell_2_Recv(SaveParameters* vSaveP, const char* buffer);
+//extern void rs232LoadCell_2_Recv(SaveParameters* vSaveP, const char* buffer);
 extern void rs232TempRecv(SaveParameters* vSaveP, const char* buffer);
-extern void recvJetCatCMD_RAC(SaveParameters* vSaveP, const char* buffer);
-extern void recvJetCatCMD_RTY(SaveParameters* vSaveP, const char* buffer);
-extern void recvJetCatCMD_RA1(SaveParameters* vSaveP, const char* buffer);
-extern void recvJetCatCMD_RI1(SaveParameters* vSaveP, const char* buffer);
-extern void recvJetCatCMD_RFI(SaveParameters* vSaveP, const char* buffer);
-extern void recvJetCatCMD_RRC(SaveParameters* vSaveP, const char* buffer);
-extern void sendJetCatCMD_RAC();
-extern void sendJetCatCMD_RTY();
-extern void sendJetCatCMD_RA1();
-extern void sendJetCatCMD_RI1();
-extern void sendJetCatCMD_RFI();
-extern void sendJetCatCMD_RRC();
-extern void sendJetCatCMD_TCO();
-extern void sendJetCatCMD_WRP();
-extern void sendJetCatCMD_WPE();
+//extern void recvJetCatCMD_RAC(SaveParameters* vSaveP, const char* buffer);
+//extern void recvJetCatCMD_RTY(SaveParameters* vSaveP, const char* buffer);
+//extern void recvJetCatCMD_RA1(SaveParameters* vSaveP, const char* buffer);
+//extern void recvJetCatCMD_RI1(SaveParameters* vSaveP, const char* buffer);
+//extern void recvJetCatCMD_RFI(SaveParameters* vSaveP, const char* buffer);
+//extern void recvJetCatCMD_RRC(SaveParameters* vSaveP, const char* buffer);
+//extern void sendJetCatCMD_RAC();
+//extern void sendJetCatCMD_RTY();
+//extern void sendJetCatCMD_RA1();
+//extern void sendJetCatCMD_RI1();
+//extern void sendJetCatCMD_RFI();
+//extern void sendJetCatCMD_RRC();
+//extern void sendJetCatCMD_TCO();
+//extern void sendJetCatCMD_WRP();
+//extern void sendJetCatCMD_WPE();
 
-extern void PrintStat(nxStatus_t l_status, char *source);
-extern void PrintTimestamp(nxTimestamp_t * time);
+
 
 extern void Parsing_Read_Actual_Value(Read_Actual_Value* var, nxFrameVar_t* l_MyFramePtr);
 extern void Parsing_Read_Voltage_Current(Read_Voltage_Current* var, nxFrameVar_t* l_MyFramePtr);
@@ -49,19 +48,22 @@ extern void Engine_On_Off_Control(nxFrameVar_t * l_MyFramePtr, unsigned int valu
 extern void Engine_Throttle_Control(nxFrameVar_t * l_MyFramePtr, float value);
 extern void Engine_RPM_Control(nxFrameVar_t * l_MyFramePtr, unsigned int value);
 
-extern void engineStart(HWND hDlg);
-extern void engineStop(HWND hDlg);
-extern void checkThrottle(HWND hDlg);
+//extern void engineStart(HWND hDlg);
+//extern void engineStop(HWND hDlg);
+//extern void controlThrottle(HWND hDlg);
+
+extern void PrintStat(nxStatus_t l_status, char *source);
+extern void PrintTimestamp(nxTimestamp_t * time);
 
 extern void logfileheadersave(FILE*	file);
 extern void logfilesave(FILE*	file, nxFrameVar_t * l_MyFramePtr,Read_Actual_Value*	\
 						vRAV, Read_Voltage_Current* vRVC, Read_Fuel_Ambient* vRFA, \
 						Read_Statistics* vRS, Read_Last_Run_Info* vRLRI, Read_System_Info* vRSI,\
 						SaveParameters* vSaveP);
-extern void logfilesave2(FILE*	file, Read_Actual_Value*	\
-						vRAV, Read_Voltage_Current* vRVC, Read_Fuel_Ambient* vRFA, \
-						Read_Statistics* vRS, Read_Last_Run_Info* vRLRI, Read_System_Info* vRSI,\
-						SaveParameters* vSaveP);
+//extern void logfilesave2(FILE*	file, Read_Actual_Value*	\
+//						vRAV, Read_Voltage_Current* vRVC, Read_Fuel_Ambient* vRFA, \
+//						Read_Statistics* vRS, Read_Last_Run_Info* vRLRI, Read_System_Info* vRSI,\
+//						SaveParameters* vSaveP);
 
 OPENFILENAME filename;
 char tfilename[256] = {0};
@@ -123,9 +125,13 @@ void onClose(HWND hDlg)
 	}
 	*/
 
-	// Clear the xnet session Input
+	// Clear the xnet session Input & Output
 	g_Status = nxClear(g_SessionRef);
 	g_Status = nxClear(g_SessionRef_Output);
+
+	//Clear the VISA instance
+	status = viClose (instr_ch1);
+	status = viClose (instr_ch2);
 
 	free(l_pFrameArray);
 
@@ -135,9 +141,8 @@ void onClose(HWND hDlg)
 
 	KillTimer(hDlg, 1);
 	KillTimer(hDlg, 2);
-
-	status = viClose (instr_ch1);
-	status = viClose (instr_ch2);
+	KillTimer(hDlg, 3);
+	KillTimer(hDlg, 4);
 
 	DestroyWindow(hDlg);
 }
@@ -148,14 +153,25 @@ void onInit(HWND hDlg){
 	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON_FILENAME), FALSE);
 	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
 	CheckRadioButton(hDlg, IDC_RADIO1, IDC_RADIO2, IDC_RADIO1);
+	EnableWindow(GetDlgItem(hDlg,IDC_EDIT2), FALSE);
+	SetDlgItemInt(hDlg, IDC_EDIT1, 0, FALSE);
+	SetDlgItemInt(hDlg, IDC_EDIT2, 35000, FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON4), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON5), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON6), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON7), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON8), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON9), FALSE);
 }
 
 void onStart(HWND hDlg)
 {
 	if (OK_flag == 0){
 		//First
-		SetTimer(hDlg, 1, 20, NULL);
-		SetTimer(hDlg, 2, 20, NULL);
+		SetTimer(hDlg, 1, 20, NULL);	//50Hz
+		SetTimer(hDlg, 2, 40, NULL);	//25Hz
+		SetTimer(hDlg, 3, 100, NULL);	//10Hz
+		SetTimer(hDlg, 4, 2000, NULL);	//1Hz
 		GetDlgItemText(hDlg, IDC_EDIT_Log, filename.lpstrFile, 256);
 		//wsprintf(tfilename,"%s",filename.lpstrFile);
 		fopen_s(&file, tfilename, "wt");
@@ -167,8 +183,8 @@ void onStart(HWND hDlg)
 		//on going
 		KillTimer(hDlg, 1);
 		KillTimer(hDlg, 2);
-		status = viClose (instr_ch1);
-		status = viClose (instr_ch2);
+		KillTimer(hDlg, 3);
+		KillTimer(hDlg, 4);
 		fclose(file);
 		SetDlgItemText(hDlg, IDOK, "Log Start!!!");
 		OK_flag = 0;
@@ -197,8 +213,7 @@ void onSerialConnect(HWND hDlg){
 	status = viSetAttribute (instr_ch2, VI_ATTR_ASRL_BAUD, 9600);
 	/* Set the number of data bits contained in each frame (from 5 to 8). 
     * The data bits for  each frame are located in the low-order bits of
-    * every byte stored in memory.    
-    */
+    * every byte stored in memory.  */
 	status = viSetAttribute (instr_ch1, VI_ATTR_ASRL_DATA_BITS, 8);
 	status = viSetAttribute (instr_ch2, VI_ATTR_ASRL_DATA_BITS, 8);
 	/* Specify parity. Options: 
@@ -206,8 +221,7 @@ void onSerialConnect(HWND hDlg){
     * VI_ASRL_PAR_ODD   - Odd parity should be used, 
     * VI_ASRL_PAR_EVEN  - Even parity should be used,
     * VI_ASRL_PAR_MARK  - Parity bit exists and is always 1,
-    * VI_ASRL_PAR_SPACE - Parity bit exists and is always 0.
-    */
+    * VI_ASRL_PAR_SPACE - Parity bit exists and is always 0.     */
 	status = viSetAttribute (instr_ch1, VI_ATTR_ASRL_PARITY, VI_ASRL_PAR_NONE);
 	status = viSetAttribute (instr_ch2, VI_ATTR_ASRL_PARITY, VI_ASRL_PAR_NONE);
 	/* Specify stop bit. Options:
@@ -218,8 +232,7 @@ void onSerialConnect(HWND hDlg){
 	status = viSetAttribute (instr_ch1, VI_ATTR_ASRL_STOP_BITS, VI_ASRL_STOP_ONE);
 	status = viSetAttribute (instr_ch2, VI_ATTR_ASRL_STOP_BITS, VI_ASRL_STOP_ONE);
 	/* Specify that the read operation should terminate when a termination 
-     * character is received.
-     */
+     * character is received.      */
 	status = viSetAttribute (instr_ch1, VI_ATTR_TERMCHAR_EN, VI_TRUE); 
 	status = viSetAttribute (instr_ch2, VI_ATTR_TERMCHAR_EN, VI_TRUE); 
 	/* Set the termination character to 0xA */
@@ -232,9 +245,7 @@ void onSerialConnect(HWND hDlg){
 	/* Engine :         (Default)*/
 	/************************************************************************/
 	status = viSetAttribute (instr_ch1, VI_ATTR_TERMCHAR, 0x03);
-	status = viSetAttribute (instr_ch1, VI_ATTR_TERMCHAR_EN, VI_TRUE);
 	status = viSetAttribute (instr_ch2, VI_ATTR_TERMCHAR, 0x0A);
-	status = viSetAttribute (instr_ch2, VI_ATTR_TERMCHAR_EN, VI_TRUE);
 }
 
 void onCANConnect(HWND hDlg){
@@ -293,30 +304,47 @@ void onDecideFilename(HWND hDlg){
 
 }
 
-void onTimer232(){
+void onTimer232_LoadCell(HWND hDlg){
 	// Read RS232 Rx Data
 
-	status = viRead (instr_ch1, buffer1, LOADCELL_READ_NUM, &retCount);
+	// Load Cell
+	status = viRead(instr_ch1, buffer1, LOADCELL_READ_NUM, &retCount);
 	if (status < VI_SUCCESS) {
 	}
 	else{
 		rs232LoadCell_1_Recv(&vSaveParameters, &buffer1);
 	}
-	/*
-	status = viRead (instr_ch2, buffer2, LOADCELL_READ_NUM, &retCount);
-	if (status < VI_SUCCESS) 
-	{
-		rs232LoadCell_2_Recv(&vSaveParameters, &buffer2);
-		//printf ("Error reading a response from the device.\n");
+	
+	/* Temperature
+	status = viRead (instr_ch2, buffer2, TEMPSENSOR_READ_NUM, &retCount);
+	if (status < VI_SUCCESS) {	
 	}
-	else
-	{
-		//printf ("\nData read: %*s\n", retCount, buffer2);
-	}
-	*/
+	else{
+		rs232TempRecv(&vSaveParameters, &buffer2);
+	}*/
 }
 
-void onTimerCAN(){
+void onTimer232_Temp(HWND hDlg){
+	// Read RS232 Rx Data
+
+	/* Load Cell
+	status = viRead (instr_ch1, buffer1, LOADCELL_READ_NUM, &retCount);
+	if (status < VI_SUCCESS) {
+	}
+	else{
+		rs232LoadCell_1_Recv(&vSaveParameters, &buffer1);
+	}*/
+
+	// Temperature
+	status = viRead(instr_ch2, buffer3, TEMPSENSOR_READ_NUM, &retCount);
+	if (status < VI_SUCCESS) {	
+	}
+	else{
+		rs232TempRecv(&vSaveParameters, &buffer3);
+	}
+}
+
+void onTimerCAN(HWND hDlg){
 	
 	//Read CAN RX Frames
 	g_Status = nxReadFrame(g_SessionRef,l_MyBuffer,sizeof(l_MyBuffer),0,&l_NumBytes);
@@ -347,8 +375,6 @@ void onTimerCAN(){
 		}
 		else{
 		}
-		//log file save
-		logfilesave(file, l_MyFramePtr, &vRAV,&vRVC,&vRFA,&vRS,&vRLRI,&vRSI, &vSaveParameters);
 		// Go to next variable-payload frame.
 		l_MyFramePtr = nxFrameIterate(l_MyFramePtr);
 	}
@@ -385,7 +411,7 @@ void engineStop(HWND hDlg){
 	g_Status = nxWriteFrame(g_SessionRef_Output,l_MyBufferOutput2,l_MyNumberOfBytesForFrames,10);
 }
 
-void checkThrottle(HWND hDlg){
+void controlThrottle(HWND hDlg){
 	int		i = 0;
 	u8		count = 0;
 	char	lpstring[10]= {0};
@@ -411,7 +437,7 @@ void checkThrottle(HWND hDlg){
 		//MessageBox(hDlg, "Out of Range", NULL, MB_OK);
 		GetDlgItemText(hDlg, IDC_EDIT1, lpstring, 10);
 
-		fvalue = atof(lpstring);
+		fvalue = (float)atof(lpstring);
 
 		Engine_Throttle_Control(l_MyFramePtrOutput, fvalue);
 	}
@@ -435,6 +461,130 @@ void checkThrottle(HWND hDlg){
 	g_Status = nxWriteFrame(g_SessionRef_Output,l_MyBufferOutput3,l_MyNumberOfBytesForFrames,10);
 }
 
+void selectPercentage(HWND hDlg){
+	//select % CMD
+	EnableWindow(GetDlgItem(hDlg,IDC_EDIT1), TRUE);
+	SetDlgItemInt(hDlg, IDC_EDIT1, 0, FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON2), TRUE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON10), TRUE);
+
+	//RPM CMD disable
+	EnableWindow(GetDlgItem(hDlg,IDC_EDIT2), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON4), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON5), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON6), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON7), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON8), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON9), FALSE);
+}
+
+void selectRPM(HWND hDlg){
+	//select RPM CMD
+	EnableWindow(GetDlgItem(hDlg,IDC_EDIT2), TRUE);
+	SetDlgItemInt(hDlg, IDC_EDIT2, 35000, FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON4), TRUE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON5), TRUE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON6), TRUE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON7), TRUE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON8), TRUE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON9), TRUE);
+
+
+	//% CMD disable
+	EnableWindow(GetDlgItem(hDlg,IDC_EDIT1), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON2), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON10), FALSE);
+}
+
+void increseThrottle(HWND hDlg){
+	//% CMD +10
+	unsigned int temp = 0;
+	temp = GetDlgItemInt(hDlg, IDC_EDIT1, NULL, FALSE);
+	temp = temp+10;
+	if (temp > 100){
+		temp = 100;
+	}
+	SetDlgItemInt(hDlg, IDC_EDIT1, temp, FALSE);
+}
+void decreseThrottle(HWND hDlg){
+	//% CMD -10
+	unsigned int temp = 0;
+	temp = GetDlgItemInt(hDlg, IDC_EDIT1, NULL, FALSE);
+	if (temp < 10){
+		temp = 0;
+	}
+	else{
+		temp = temp-10;
+	}
+	SetDlgItemInt(hDlg, IDC_EDIT1, temp, FALSE);
+}
+void increseRPM1000(HWND hDlg){
+	//RPM CMD +1000
+	unsigned int temp = 0;
+	temp = GetDlgItemInt(hDlg, IDC_EDIT2, NULL, FALSE);
+	temp = temp+1000;
+	if (temp > 115000){
+		temp = 115000;
+	}
+	SetDlgItemInt(hDlg, IDC_EDIT2, temp, FALSE);
+}
+void decreseRPM1000(HWND hDlg){
+	//RPM CMD -1000
+	unsigned int temp = 0;
+	temp = GetDlgItemInt(hDlg, IDC_EDIT2, NULL, FALSE);
+	if (temp < 1000){
+		temp = 0;
+	}
+	else{
+		temp = temp-1000;
+	}
+	SetDlgItemInt(hDlg, IDC_EDIT2, temp, FALSE);
+}
+void increseRPM100(HWND hDlg){
+	//RPM CMD +100
+	unsigned int temp = 0;
+	temp = GetDlgItemInt(hDlg, IDC_EDIT2, NULL, FALSE);
+	temp = temp+100;
+	if (temp > 115000){
+		temp = 115000;
+	}
+	SetDlgItemInt(hDlg, IDC_EDIT2, temp, FALSE);
+}
+void decreseRPM100(HWND hDlg){
+	//RPM CMD 100
+	unsigned int temp = 0;
+	temp = GetDlgItemInt(hDlg, IDC_EDIT2, NULL, FALSE);
+	if (temp < 100){
+		temp = 0;
+	}
+	else{
+		temp = temp-100;
+	}
+	SetDlgItemInt(hDlg, IDC_EDIT2, temp, FALSE);
+}
+void increseRPM10(HWND hDlg){
+	//RPM CMD +10
+	unsigned int temp = 0;
+	temp = GetDlgItemInt(hDlg, IDC_EDIT2, NULL, FALSE);
+	temp = temp+10;
+	if (temp > 115000){
+		temp = 115000;
+	}
+	SetDlgItemInt(hDlg, IDC_EDIT2, temp, FALSE);
+}
+void decreseRPM10(HWND hDlg){
+	//RPM CMD -10
+	unsigned int temp = 0;
+	temp = GetDlgItemInt(hDlg, IDC_EDIT2, NULL, FALSE);
+	if (temp < 10){
+		temp = 0;
+	}
+	else{
+		temp = temp-10;
+	}
+	SetDlgItemInt(hDlg, IDC_EDIT2, temp, FALSE);
+}
+
 void onPaint(HWND hDlg){
 	float area;
 	char mtext[100] = {0};
@@ -455,54 +605,80 @@ void onPaint(HWND hDlg){
 	if (OFF==vRAV.State){
 		sprintf(mtext, "OFF");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), TRUE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), TRUE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), TRUE);
 	}
 	else if (WAIT_for_RPM==vRAV.State){
 		sprintf(mtext, "WAIT_for_RPM");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (IGNITE==vRAV.State){
 		sprintf(mtext, "IGNITE");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (ACCELERATE==vRAV.State){
 		sprintf(mtext, "ACCELERATE");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (STABILIZE==vRAV.State){
 		sprintf(mtext, "STABILIZE");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (LEARN_LO==vRAV.State){
 		sprintf(mtext, "LEARN_LO");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (OFF_COOLING==vRAV.State){
 		sprintf(mtext, "OFF_COOLING");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), TRUE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), TRUE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), TRUE);
 	}
 	else if (SLOW_DOWN==vRAV.State){
 		sprintf(mtext, "SLOW_DOWN");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (AUTO_OFF==vRAV.State){
 		sprintf(mtext, "AUTO_OFF");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (RUN==vRAV.State){
 		sprintf(mtext, "RUN");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (ACCELATION_DELAY==vRAV.State){
 		sprintf(mtext, "ACCELATION_DELAY");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (SPEED_REG==vRAV.State){
 		sprintf(mtext, "SPEED_REG");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	else if (TWO_SHAFT_REGULATE==vRAV.State){
 		sprintf(mtext, "TWO_SHAFT_REGULATE");
 		EnableWindow(GetDlgItem(hDlg,IDC_BUTTON1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO1), FALSE);
+		EnableWindow(GetDlgItem(hDlg,IDC_RADIO2), FALSE);
 	}
 	SetDlgItemText(hDlg, IDC_EDIT13, mtext);
 
@@ -526,8 +702,14 @@ void onPaint(HWND hDlg){
 	
 	SetDlgItemInt(hDlg, IDC_EDIT7, vRFA.Fuel_Flow, FALSE);
 	SetDlgItemInt(hDlg, IDC_EDIT6, vRFA.Fuel_Consumed, FALSE);
-	SetDlgItemInt(hDlg, IDC_EDIT14, vRFA.Air_Pressure, FALSE);
-	SetDlgItemInt(hDlg, IDC_EDIT8, vRFA.Ambient_Temperature, FALSE);
+	//SetDlgItemInt(hDlg, IDC_EDIT14, vRFA.Air_Pressure, FALSE);
+	memset(mtext, 0x00, sizeof(mtext));
+	sprintf(mtext, "%f", vRFA.Air_Pressure);
+	SetDlgItemText(hDlg, IDC_EDIT14, mtext);
+	//SetDlgItemInt(hDlg, IDC_EDIT8, vRFA.Ambient_Temperature, FALSE);
+	memset(mtext, 0x00, sizeof(mtext));
+	sprintf(mtext, "%f", vRFA.Ambient_Temperature);
+	SetDlgItemText(hDlg, IDC_EDIT8, mtext);
 
 	SetDlgItemInt(hDlg, IDC_EDIT9, vRS.Runs_OK, FALSE);
 	SetDlgItemInt(hDlg, IDC_EDIT17, vRS.Runs_Aborted, FALSE);
@@ -539,14 +721,27 @@ void onPaint(HWND hDlg){
 	memset(mtext, 0x00, sizeof(mtext));
 	sprintf(mtext, "%f", vRLRI.Last_Off_EGT);
 	SetDlgItemText(hDlg, IDC_EDIT23, mtext);
-	SetDlgItemInt(hDlg, IDC_EDIT24, vRLRI.Last_Off_PumpVoltage, FALSE);
+	//SetDlgItemInt(hDlg, IDC_EDIT24, vRLRI.Last_Off_PumpVoltage, FALSE);
+	memset(mtext, 0x00, sizeof(mtext));
+	sprintf(mtext, "%f", vRLRI.Last_Off_PumpVoltage);
+	SetDlgItemText(hDlg, IDC_EDIT24, mtext);
 	SetDlgItemInt(hDlg, IDC_EDIT26, vRLRI.Last_Off_Condition, FALSE);
 
 	SetDlgItemInt(hDlg, IDC_EDIT30, vRSI.Serial_Number, FALSE);
 	SetDlgItemInt(hDlg, IDC_EDIT29, vRSI.Firmware_Version, FALSE);
 	SetDlgItemInt(hDlg, IDC_EDIT28, vRSI.Engine_Type, FALSE);
 	SetDlgItemInt(hDlg, IDC_EDIT27, vRSI.Engine_Sub_Type, FALSE);
-	SetDlgItemInt(hDlg, IDC_EDIT25, vRSI.OpMode, FALSE);
+	//SetDlgItemInt(hDlg, IDC_EDIT25, vRSI.OpMode, FALSE);
+	if (NORMAL_OP == vRSI.OpMode){
+		sprintf(mtext, "NORMAL_OP");
+	}
+	else if(ECU_CAN_FLASH == vRSI.OpMode){
+		sprintf(mtext, "ECU_BURNING-CAN");
+	}
+	else if(ECU_RS232_FLASH == vRSI.OpMode){
+		sprintf(mtext, "ECU_BURNING-RS232");
+	}
+	SetDlgItemText(hDlg, IDC_EDIT25, mtext);
 	
 	//Load Cell Data
 	//SetDlgItemInt(hDlg, IDC_EDIT_LC, vSaveParameters.LoadCell01, FALSE);
@@ -562,6 +757,11 @@ void onPaint(HWND hDlg){
 
 	//Counter
 	SetDlgItemInt(hDlg, IDC_EDIT_Counter, counter, FALSE);
+}
+
+void onLogging(HWND hDlg){
+	//log file save
+	logfilesave(file, l_MyFramePtr, &vRAV,&vRVC,&vRFA,&vRS,&vRLRI,&vRSI, &vSaveParameters);
 }
 
 INT_PTR CALLBACK DialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -581,22 +781,42 @@ INT_PTR CALLBACK DialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			EnableWindow(GetDlgItem(hDlg,IDC_BUTTON_FILENAME), TRUE);
 			return TRUE;
 		case IDC_BUTTON1:	engineStart(hDlg);		return TRUE;
-		case IDC_BUTTON2:	engineStop(hDlg);		return TRUE;
-		case IDC_BUTTON3:	checkThrottle(hDlg);	return TRUE;
+		case IDC_BUTTON3:	engineStop(hDlg);		return TRUE;
+		case IDC_RADIO1:	selectPercentage(hDlg);	return TRUE;
+		case IDC_RADIO2:	selectRPM(hDlg);		return TRUE;
+		case IDC_BUTTON2:	increseThrottle(hDlg);	return TRUE;
+		case IDC_BUTTON10:	decreseThrottle(hDlg);	return TRUE;
+		case IDC_BUTTON4:	increseRPM1000(hDlg);	return TRUE;
+		case IDC_BUTTON5:	decreseRPM1000(hDlg);	return TRUE;
+		case IDC_BUTTON6:	increseRPM100(hDlg);	return TRUE;
+		case IDC_BUTTON7:	decreseRPM100(hDlg);	return TRUE;
+		case IDC_BUTTON8:	increseRPM10(hDlg);		return TRUE;
+		case IDC_BUTTON9:	decreseRPM10(hDlg);		return TRUE;
 		}
 		break;
 	case WM_TIMER:
 		switch(wParam)
 		{
 		case 1: 
-			onTimerCAN(); 
-			onTimer232();
-			//logfilesave2(file, &vRAV,&vRVC,&vRFA,&vRS,&vRLRI,&vRSI, &vSaveParameters);
-			return TRUE;
-		case 2: onPaint(hDlg); return TRUE;
+			//50Hz (20ms)
+			onPaint(hDlg); 
+			onTimer232_LoadCell(hDlg);
+			break;
+		case 2: 
+			//25Hz (40ms)
+			controlThrottle(hDlg);
+			break;
+		case 3: 
+			//10Hz (100ms)
+			onTimerCAN(hDlg); 
+			onLogging(hDlg); 
+			break;
+		case 4:
+			//1Hz (2000ms)
+			onTimer232_Temp(hDlg);
+			break;
 		}
 		break;
-	//case WM_PAINT:	checkThrottle(hDlg);	return TRUE;
 	case WM_CLOSE:   onClose(hDlg); return TRUE; /* call subroutine */
 	case WM_DESTROY: PostQuitMessage(0); return TRUE;
 	}
@@ -705,8 +925,10 @@ int _tWinMain(HINSTANCE hInst, HINSTANCE h0, LPCTSTR lpCmdLine, int nCmdShow){
 	BOOL ret;
 	MSG msg;
 
-
+	
 	hDlg = CreateDialogParam(hInst, MAKEINTRESOURCE(IDD_DIALOG1), 0, DialogProc, 0);
+
+	LoadIcon(hInst, IDI_ICON1);
 
 	ShowWindow(hDlg, nCmdShow);
 

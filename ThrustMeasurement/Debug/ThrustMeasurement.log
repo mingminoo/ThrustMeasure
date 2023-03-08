@@ -1,4 +1,4 @@
-﻿Build started 2023-03-07 오후 10:32:26.
+﻿Build started 2023-03-08 오후 10:35:29.
      1>Project "D:\work\[work_In-House Tool]\Thrust_Measure_System\ThrustMeasurement\ThrustMeasurement\ThrustMeasurement.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\IVI Foundation\VISA\WinNT\include" /I"C:\Program Files (x86)\National Instruments\Shared\ExternalCompilerSupport\C\\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TC /analyze- /errorReport:prompt Engine_CMD_Msg.c Engine_Msg_Parser.c JetCat_CMD.c JetCat_RSP.c LoadCell.c main.c TempSensor.c
@@ -6,63 +6,75 @@
      1>c:\program files (x86)\national instruments\shared\externalcompilersupport\c\include\nixnet.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
          main.c
      1>c:\program files (x86)\national instruments\shared\externalcompilersupport\c\include\nixnet.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(284): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(295): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(303): warning C4047: 'function' : 'const char *' differs in levels of indirection from 'unsigned char (*)[20]'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(303): warning C4024: 'rs232LoadCell_1_Recv' : different types for formal and actual parameter 2
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(414): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(447): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(315): warning C4047: 'function' : 'const char *' differs in levels of indirection from 'unsigned char (*)[30]'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(315): warning C4024: 'rs232LoadCell_1_Recv' : different types for formal and actual parameter 2
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(343): warning C4047: 'function' : 'const char *' differs in levels of indirection from 'unsigned char (*)[16]'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(343): warning C4024: 'rs232TempRecv' : different types for formal and actual parameter 2
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(597): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(451): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(601): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(456): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(606): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(460): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(612): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(464): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(618): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(468): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(624): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(472): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(630): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(476): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(636): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(480): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(642): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(484): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(488): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(492): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(496): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(500): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(504): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(511): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(515): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(519): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(523): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(529): warning C4244: 'function' : conversion from 'float' to 'UINT', possible loss of data
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(530): warning C4244: 'function' : conversion from 'float' to 'UINT', possible loss of data
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(540): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(542): warning C4244: 'function' : conversion from 'float' to 'UINT', possible loss of data
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(554): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(560): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(439): warning C4101: 'area' : unreferenced local variable
      1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(648): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(703): warning C4007: 'WinMain' : must be '__stdcall'
-     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(703): warning C4028: formal parameter 3 different from declaration
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(654): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(660): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(666): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(672): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(678): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(687): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(691): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(695): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(699): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(707): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(711): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(722): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(726): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(736): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(739): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(742): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(749): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(755): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(589): warning C4101: 'area' : unreferenced local variable
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(868): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(923): warning C4007: 'WinMain' : must be '__stdcall'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(923): warning C4028: formal parameter 3 different from declaration
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(931): warning C4047: 'function' : 'LPCSTR' differs in levels of indirection from 'int'
+     1>d:\work\[work_in-house tool]\thrust_measure_system\thrustmeasurement\thrustmeasurement\main.c(931): warning C4024: 'LoadIconA' : different types for formal and actual parameter 2
          LoadCell.c
      1>c:\program files (x86)\national instruments\shared\externalcompilersupport\c\include\nixnet.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
          JetCat_RSP.c
@@ -90,4 +102,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.81
+Time Elapsed 00:00:01.73

@@ -8,7 +8,7 @@
 
 
 #define	LOADCELL_READ_NUM	20
-#define TEMPSENSOR_READ_NUM	8
+#define TEMPSENSOR_READ_NUM	10
 #define ENGINE_READ_NUM		50
 #define ENGINE_RAC_NUM		40
 #define ENGINE_RTY_NUM		41
@@ -47,9 +47,9 @@ static ViSession		instr_ch4;
 static ViUInt32			retCount;
 static ViUInt32			writeCount;
 static ViStatus			status;
-static unsigned char	buffer1[20];
-static unsigned char	buffer2[20];
-static unsigned char	buffer3[8];
+static unsigned char	buffer1[30];
+static unsigned char	buffer2[30];
+static unsigned char	buffer3[16];
 static unsigned char	buffer4[100];
 static char				stringinput[512];
 
