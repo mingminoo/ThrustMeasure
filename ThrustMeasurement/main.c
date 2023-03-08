@@ -162,6 +162,7 @@ void onInit(HWND hDlg){
 	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON7), FALSE);
 	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON8), FALSE);
 	EnableWindow(GetDlgItem(hDlg,IDC_BUTTON9), FALSE);
+	EnableWindow(GetDlgItem(hDlg,IDC_EDIT_Log), FALSE);
 }
 
 void onStart(HWND hDlg)
@@ -518,6 +519,24 @@ void decreseThrottle(HWND hDlg){
 	}
 	SetDlgItemInt(hDlg, IDC_EDIT1, temp, FALSE);
 }
+void presetThrottle0(HWND hDlg){
+	//% CMD 0
+	unsigned int temp = 0;
+	temp = 0;
+	SetDlgItemInt(hDlg, IDC_EDIT1, temp, FALSE);
+}
+void presetThrottle50(HWND hDlg){
+	//% CMD 50
+	unsigned int temp = 0;
+	temp = 50;
+	SetDlgItemInt(hDlg, IDC_EDIT1, temp, FALSE);
+}
+void presetThrottle100(HWND hDlg){
+	//% CMD 100
+	unsigned int temp = 0;
+	temp = 100;
+	SetDlgItemInt(hDlg, IDC_EDIT1, temp, FALSE);
+}
 void increseRPM1000(HWND hDlg){
 	//RPM CMD +1000
 	unsigned int temp = 0;
@@ -776,9 +795,11 @@ INT_PTR CALLBACK DialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case IDOK: onStart(hDlg); return TRUE;
 		case IDC_BUTTON_FILENAME: onDecideFilename(hDlg); return TRUE;
 		case IDC_BUTTON_CO: 
-			onSerialConnect(hDlg);
-			onCANConnect(hDlg); 
+			//onSerialConnect(hDlg);
+			//onCANConnect(hDlg); 
 			EnableWindow(GetDlgItem(hDlg,IDC_BUTTON_FILENAME), TRUE);
+			EnableWindow(GetDlgItem(hDlg,IDC_EDIT_Log), TRUE);
+			EnableWindow(GetDlgItem(hDlg,IDC_BUTTON_CO), FALSE);
 			return TRUE;
 		case IDC_BUTTON1:	engineStart(hDlg);		return TRUE;
 		case IDC_BUTTON3:	engineStop(hDlg);		return TRUE;
@@ -792,6 +813,9 @@ INT_PTR CALLBACK DialogProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case IDC_BUTTON7:	decreseRPM100(hDlg);	return TRUE;
 		case IDC_BUTTON8:	increseRPM10(hDlg);		return TRUE;
 		case IDC_BUTTON9:	decreseRPM10(hDlg);		return TRUE;
+		case IDC_BUTTON11:	decreseRPM10(hDlg);		return TRUE;
+		case IDC_BUTTON12:	decreseRPM10(hDlg);		return TRUE;
+		case IDC_BUTTON13:	decreseRPM10(hDlg);		return TRUE;
 		}
 		break;
 	case WM_TIMER:

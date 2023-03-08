@@ -60,5 +60,11 @@
     <Image Include="ThrustMeasurement.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\Binto\Desktop\2023-03-09 00 16 19.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
